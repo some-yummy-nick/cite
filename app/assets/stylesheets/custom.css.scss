@@ -1,7 +1,4 @@
 @import "bootstrap";
-
-/* universal */
-
 html {
   overflow-y: scroll;
 }
@@ -24,6 +21,17 @@ textarea {
 
 .center h1 {
   margin-bottom: 10px;
+}
+
+
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
+$lightGray: #999;
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
@@ -51,7 +59,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #999;
+  color: $lightGray;
 }
 
 p {
@@ -72,10 +80,11 @@ p {
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
-  &:hover {
-    color: #fff;
-    text-decoration: none;
-  }
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
 }
 
 
@@ -84,12 +93,12 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #999;
+  border-top: 1px solid $grayMediumLight;
+  color: $lightGray;
   a {
-    color: #555;
+    color: $gray;
     &:hover {
-      color: #222;
+      color: $grayDarker;
     }
   }
   small {
@@ -104,8 +113,18 @@ footer {
     }
   }
 }
-$grayMediumLight: #eaeaea;
-$lightGray: #999;
+
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
 
 /* sidebar */
 
@@ -131,13 +150,34 @@ aside {
     }
   }
 }
-
-@mixin box_sizing {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+.stats {
+  overflow: auto;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  strong {
+    display: block;
+  }
 }
 
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+}
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -158,4 +198,60 @@ select,
 
 input {
   height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+/* microposts */
+
+.microposts {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayLight;
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
 }
