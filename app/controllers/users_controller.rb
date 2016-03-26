@@ -44,6 +44,14 @@ def edit
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
+  def update
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
     private
 
       def user_params
@@ -57,14 +65,7 @@ def edit
       redirect_to(root_url) unless current_user?(@user)
     end
   
-  def update
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
-    else
-      render 'edit'
-    end
-  end
+  
  def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
